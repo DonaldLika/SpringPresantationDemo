@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		">
+
+	<context:property-placeholder location="test.properties" />
+	<context:component-scan base-package="com.ikubinfo.xml.*"></context:component-scan>
+
+
+
+	<bean id="school" class="com.ikubinfo.xml.dependencyinjection.School"></bean>
+
+	<!-- Injecting School at constructor and exam as setter injection -->
+	<bean name="student" class="com.ikubinfo.xml.dependencyinjection.Student">
+		<constructor-arg ref="school"></constructor-arg>
+		<property name="exam" ref="exam"></property>
+	</bean>
+
+
+	<bean name="exam" class="com.ikubinfo.xml.dependencyinjection.Exam"></bean>
+
+
+
+
+</beans>
