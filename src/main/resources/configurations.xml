@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd
 		">
 
 	<context:property-placeholder location="test.properties" />
-	<context:component-scan base-package="com.ikubinfo.xml.*"></context:component-scan>
+	<context:component-scan base-package="com.ikubinfo.aop.*"></context:component-scan>
+
+	<!-- Enable AspectJ style of Spring AOP using XML -->
+
+	<aop:aspectj-autoproxy  />
 
 
-
-	<bean id="school" class="com.ikubinfo.xml.dependencyinjection.School"></bean>
-
-	<!-- Injecting School at constructor and exam as setter injection -->
-	<bean name="student" class="com.ikubinfo.xml.dependencyinjection.Student">
-		<constructor-arg ref="school"></constructor-arg>
-		<property name="exam" ref="exam"></property>
-	</bean>
-
-
-	<bean name="exam" class="com.ikubinfo.xml.dependencyinjection.Exam"></bean>
-
-
+<!-- 	<bean id="employeeAspect" class="com.ikubinfo.aop.aspect.EmployeeAspect"></bean>
+ 
+ 
+ 
+	<aop:config>
+		<aop:pointcut expression="execution(* com.ikubinfo.aop.service.*.get*())"
+			id="getMethodsPointCut" />
+		<aop:aspect ref="employeeAspect">
+			<aop:before pointcut="execution(public String getName())"
+				method="getNameAdvice" />
+		</aop:aspect>
+	</aop:config>
+ -->
 
 
 </beans>
